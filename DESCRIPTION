@@ -1,12 +1,27 @@
 Package: SFEData
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Example SpatialFeatureExperiment datasets
+Version: 0.99.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    c(person("Lambda", "Moses", email = "dlu2@caltech.edu", 
+    role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0002-7092-9427")),
+    person("Lior", "Pachter", email = "lpachter@caltech.edu",
+    role = c("aut", "ths"),
+    comment = c(ORCID = "0000-0002-9164-6231")))
+Description: 
+    Example spatial transcriptomics datasets with Simple Geometry annotations
+    as SpatialFeatureExperiment objects. In the first version, the only full
+    dataset is a mouse skeletal muscle Visium dataset 2 days after notexin
+    injury from Large-scale integration of single-cell transcriptomic data 
+    captures transitional progenitor states in mouse skeletal muscle 
+    regeneration. More datasets will be added in later versions.
+Suggests: SpatialFeatureExperiment
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+biocViews: 
+    ExperimentHub,
+    ExpressionData,
+    Mus_musculus_Data,
+    SpatialData
