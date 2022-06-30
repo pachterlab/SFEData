@@ -73,6 +73,7 @@ myofiber_poly2 <- raster2polygon(myofiber_tiff)
 all(st_is_valid(myofiber_poly2$simplified))
 # Some simplified polygons are invalid due to a protruding line.
 myofiber_poly2$simplified <- st_buffer(myofiber_poly2$simplified, 0)
+unique(st_geometry_type(myofiber_poly2$full))
 # Now all polygons, full and simplified, are valid. No more MULTIPOLYGONs.
 # Compute morphological metrics
 myofiber_morphology <- computeFeatures.moment(myofiber_tiff)
@@ -180,6 +181,22 @@ sfe <- sfe[rowData(sfe)$means > 0,]
 rowData(sfe)$cv2 <- rowData(sfe)$vars/rowData(sfe)$means^2
 
 # Whether spots are on tissue
-colData(sfe)$in_tissue <- annotOp(sfe, "spotPoly", "tissueBoundary")
+colData(sfe)$in_tissue <- annotPred(sfe, "spotPoly", "tissueBoundary")
 
 saveRDS(sfe, "data/sfe_vis5a.rds")
+
+# Small subset for function examples
+sfe_small <- crop(sfe, xmin = 5000, xmax = 7000, ymin = 13000, ymax = 15000)
+saveRDS(sfe_small, "data/sfe_vis5a_small.rds")
+
+# I have only manually annotated myofibers for Vis5A.
+# For demonstration purposes, I'll use two different portions of this one
+# dataset and pretend that they're different samples.
+sfe_small2 <- crop(sfe, xmin = 6000, xmax = 8000, ymin = 7000, ymax = 9000)
+colData(sfe_small2)$sample_id <- "sample02"
+for (n in names(int_metadata(sfe_small2)$annotGeometries)) {
+  int_metadata(sfe_small2)$annotGeometries[[n]]$sample_id <- "sample02"
+}
+names(int_metadata(sfe_small2)$spatialGraphs) <- "sample02"
+# Maybe I need a convenience function to change sample_id.
+saveRDS("sfe_small2", "data/sfe_small2.rds")
