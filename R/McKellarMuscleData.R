@@ -42,7 +42,7 @@
 #' @param force Logical, whether to force redownload if the files are already
 #' present. Defaults to \code{FALSE}.
 #' @param verbose Whether to display progress of download.
-#' @importFrom ExperimentHub ExperimentHub getExperimentHubOption
+#' @importFrom ExperimentHub ExperimentHub
 #' @importFrom AnnotationHub query
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export

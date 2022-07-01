@@ -3,4 +3,3 @@
 export(McKellarMuscleData)
 importFrom(AnnotationHub,query)
 importFrom(ExperimentHub,ExperimentHub)
-importFrom(ExperimentHub,getExperimentHubOption)
