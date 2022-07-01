@@ -199,4 +199,4 @@ for (n in names(int_metadata(sfe_small2)$annotGeometries)) {
 }
 names(int_metadata(sfe_small2)$spatialGraphs) <- "sample02"
 # Maybe I need a convenience function to change sample_id.
-saveRDS("sfe_small2", "data/sfe_small2.rds")
+saveRDS(sfe_small2, "data/sfe_small2.rds")

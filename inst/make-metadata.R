@@ -7,7 +7,7 @@ metadata <- data.frame(
                   "A small subset of the first dataset in this package for quick demos.",
                   "A second small subset of the first dataset to demonstrate working with multiple samples in the same SFE object."),
   BiocVersion = "3.16",
-  Genome = "mm10",
+  Genome = "GRCm38",
   SourceType = "MTX",
   SourceUrl = "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4904759",
   SourceVersion = "",
@@ -18,6 +18,6 @@ metadata <- data.frame(
   Maintainer = "Lambda Moses <dlu2@caltech.edu>",
   RDataClass = "SpatialFeatureExperiment",
   DispatchClass = "Rds",
-  RDataPath = "placeholder"
+  RDataPath = file.path("SFEData", c("sfe_vis5a.rds", "sfe_vis5a_small.rds", "sfe_small2.rds"))
 )
-write.csv(metadata, "inst/extdata/metadata.csv")
+write.csv(metadata, "inst/extdata/metadata.csv", row.names = FALSE)
