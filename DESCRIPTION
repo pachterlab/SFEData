@@ -15,7 +15,10 @@ Description:
     injury from 'Large-scale integration of single-cell transcriptomic data 
     captures transitional progenitor states in mouse skeletal muscle 
     regeneration'. More datasets will be added in later versions.
-Suggests: SpatialFeatureExperiment
+Suggests: 
+    knitr,
+    rmarkdown,
+    SpatialFeatureExperiment
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -25,3 +28,4 @@ biocViews:
     ExpressionData,
     Mus_musculus_Data,
     SpatialData
+VignetteBuilder: knitr

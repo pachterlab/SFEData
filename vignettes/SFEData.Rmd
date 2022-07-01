@@ -1,0 +1,31 @@
+---
+title: "Example SpatialFeatureExperiment datasets"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Example SpatialFeatureExperiment datasets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SFEData)
+```
+
+Example spatial transcriptomics datasets with [Simple Features](https://r-spatial.github.io/sf/) annotations as `SpatialFeatureExperiment` objects. In the first version, the only full dataset is a mouse skeletal muscle Visium dataset 2 days after notexin injury from [Large-scale integration of single-cell transcriptomic data captures transitional progenitor states in mouse skeletal muscle regeneration](https://doi.org/10.1038/s42003-021-02810-x). Two small subsets of the full dataset are also included for quick demos. More datasets will be added in later versions.
+
+This package is used extensively in examples and vignettes of the `SpatialFeatureExperiment` and `Voyager` packages. For now, the basic usage:
+
+```{r}
+sfe <- McKellarMuscleData(dataset = "small")
+```
+
+```{r}
+sessionInfo()
+```
