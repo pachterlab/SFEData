@@ -47,12 +47,12 @@
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 #' @examples
-#' sfe <- McKellarMuscleData()
+#' sfe <- McKellarMuscleData("small")
 McKellarMuscleData <- function(dataset = c("full", "small", "small2"),
                                force = FALSE, verbose = TRUE) {
   dataset <- match.arg(dataset)
   dss <- c("full", "small", "small2")
-  ids <- 1:3 # placeholder
+  ids <- 7560:7562 # placeholder
   names(ids) <- dss
   id <- paste0("EH", ids[dataset])
   eh <- ExperimentHub()

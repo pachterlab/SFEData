@@ -15,6 +15,9 @@ Description:
     injury from 'Large-scale integration of single-cell transcriptomic data 
     captures transitional progenitor states in mouse skeletal muscle 
     regeneration'. More datasets will be added in later versions.
+Imports:
+    AnnotationHub,
+    ExperimentHub
 Suggests: 
     knitr,
     rmarkdown,

@@ -62,5 +62,5 @@ intensity and then converting the mask into polygons with OpenCV. Small
 pieces which are debris were removed.
 }
 \examples{
-sfe <- McKellarMuscleData()
+sfe <- McKellarMuscleData("small")
 }
