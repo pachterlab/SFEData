@@ -1,3 +1,3 @@
 # SFEData
 
-Example datasets for SpatialFeatureExperiment
+Example spatial transcriptomics datasets with [Simple Features](https://r-spatial.github.io/sf/) annotations as [`SpatialFeatureExperiment`](https://github.com/pachterlab/SpatialFeatureExperiment) (SFE) objects. In the first version, the only full dataset is a mouse skeletal muscle Visium dataset 2 days after notexin injury from 'Large-scale integration of single-cell transcriptomic data captures transitional progenitor states in mouse skeletal muscle regeneration'. In addition to the gene count matrix, myofiber and nuclei segmentation polygons are provided. The dataset and small subsets of it are used extensively in examples and vignettes of the SFE and [`Voyager`](https://github.com/pachterlab/Voyager) packages. More datasets will be added in later versions.
