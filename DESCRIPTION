@@ -1,6 +1,6 @@
 Package: SFEData
 Title: Example SpatialFeatureExperiment datasets
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: 
     c(person("Lambda", "Moses", email = "dlu2@caltech.edu", 
     role = c("aut", "cre"),
@@ -21,6 +21,7 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
+    SpatialFeatureExperiment,
     testthat (>= 3.0.0)
 License: GPL-3
 Encoding: UTF-8
