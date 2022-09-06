@@ -1,6 +1,6 @@
 ---
 title: "Example SpatialFeatureExperiment datasets"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Example SpatialFeatureExperiment datasets}
   %\VignetteEngine{knitr::rmarkdown}
@@ -13,6 +13,16 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+# Installation
+
+This package can be installed from Bioconductor with the following command:
+```{r, eval=FALSE}
+if (!requireNamespace(BiocManager, quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install("SFEData")
+```
+
+# Usage
 
 ```{r setup}
 library(SFEData)
