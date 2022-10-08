@@ -1,6 +1,7 @@
 library(SpatialFeatureExperiment)
 library(SingleCellExperiment)
 library(SpatialExperiment)
+library(vroom)
 library(sf)
 library(terra)
 library(EBImage)
@@ -10,6 +11,10 @@ library(tidyverse)
 library(jsonlite)
 library(Matrix)
 library(Voyager)
+library(R.utils)
+library(stringr)
+# Mouse skeletal muscle Visium dataset==========================
+
 # The data comes from this paper:
 # McKellar DW, Walter LD, Song LT, Mantri M et
 # al. Large-scale integration of single-cell transcriptomic data captures
@@ -200,3 +205,69 @@ for (n in names(int_metadata(sfe_small2)$annotGeometries)) {
 names(int_metadata(sfe_small2)$spatialGraphs) <- "sample02"
 # Maybe I need a convenience function to change sample_id.
 saveRDS(sfe_small2, "data/sfe_small2.rds")
+
+# Melanoma brain metastasis slide-seq2 data====================
+
+# The data comes from
+# Jana Biermann, Johannes C. Melms, Amit Dipak Amin, Yiping Wang, Lindsay A.
+# Caprio, Alcida Karz, Somnath Tagore, Irving Barrera, Miguel A.
+# Ibarra-Arellano, Massimo Andreatta, Benjamin T. Fullerton, Kristjan H.
+# Gretarsson, Varun Sahu, Vaibhav S. Mangipudy, Trang T.T. Nguyen, Ajay Nair,
+# Meri Rogava, Patricia Ho, Peter D. Koch, Matei Banu, Nelson Humala, Aayushi
+# Mahajan, Zachary H. Walsh, Shivem B. Shah, Daniel H. Vaccaro, Blake Caldwell,
+# Michael Mu, Florian Wünnemann, Margot Chazotte, Simon Berhe, Adrienne M.
+# Luoma, Joseph Driver, Matthew Ingham, Shaheer A. Khan, Suthee Rapisuwon, Craig
+# L. Slingluff, Thomas Eigentler, Martin Röcken, Richard Carvajal, Michael B.
+# Atkins, Michael A. Davies, Albert Agustinus, Samuel F. Bakhoum, Elham Azizi,
+# Markus Siegelin, Chao Lu, Santiago J. Carmona, Hanina Hibshoosh, Antoni Ribas,
+# Peter Canoll, Jeffrey N. Bruce, Wenya Linda Bi, Praveen Agrawal, Denis
+# Schapiro, Eva Hernando, Evan Z. Macosko, Fei Chen, Gary K. Schwartz, Benjamin
+# Izar,
+# Dissecting the treatment-naive ecosystem of human melanoma brain metastasis,
+# Cell,
+# Volume 185, Issue 14,
+# 2022,
+# Pages 2591-2608.e30,
+# ISSN 0092-8674,
+# https://doi.org/10.1016/j.cell.2022.06.007.
+# (https://www.sciencedirect.com/science/article/pii/S0092867422007127)
+
+# The gene count matrix and spatial coordinates were downloaded from GEO
+mbm <- vroom("GSM6025935_MBM05_rep1_slide_raw_counts.csv")
+mbm_coords <- vroom("GSM6025935_MBM05_rep1_slide_spatial_coordinates.csv")
+genes <- mbm[,1]
+mbm <- as.matrix(mbm[,-1])
+mbm <- as(mbm, "dgCMatrix")
+rownames(mbm) <- genes$...1
+mbm <- mbm[rowSums(mbm) > 0,]
+# The genes are already in symbols rather than Ensembl IDs
+sfe_mbm <- SpatialFeatureExperiment(assays = list(counts = mbm),
+                                    spatialCoords = as.matrix(mbm_coords[,c("xcoord", "ycoord")]))
+addQC <- function(sfe) {
+  mat <- counts(sfe)
+  colData(sfe)$nCounts <- colSums(mat)
+  colData(sfe)$nGenes <- colSums(mat > 0)
+  mito_genes <- str_detect(rownames(mat), "^MT-")
+  colData(sfe)$prop_mito <- colSums(mat[mito_genes,])/colData(sfe)$nCounts
+  rowData(sfe)$means <- rowMeans(mat)
+  rowData(sfe)$vars <- rowVars(mat)
+  rowData(sfe)$cv2 <- rowData(sfe)$vars/rowData(sfe)$means^2
+  sfe
+}
+sfe_mbm <- addQC(sfe_mbm)
+saveRDS(sfe_mbm, "mbm_slide_seq.rds")
+
+# Extracraneal metastasis
+ecm <- vroom("GSM6025946_ECM01_rep1_slide_raw_counts.csv")
+ecm_coords <- vroom("GSM6025946_ECM01_rep1_slide_spatial_coordinates.csv")
+genes <- ecm[,1]
+ecm <- as.matrix(ecm[,-1])
+ecm <- as(ecm, "dgCMatrix")
+rownames(ecm) <- genes$...1
+ecm <- ecm[rowSums(ecm) > 0,]
+
+sfe_ecm <- SpatialFeatureExperiment(assays = list(counts = ecm),
+                                    spatialCoords = as.matrix(ecm_coords[,c("xcoord", "ycoord")]))
+sfe_ecm <- addQC(sfe_ecm)
+saveRDS(sfe_ecm, "ecm_slide_seq.rds")
+
