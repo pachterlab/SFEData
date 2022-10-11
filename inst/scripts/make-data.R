@@ -13,6 +13,8 @@ library(Matrix)
 library(Voyager)
 library(R.utils)
 library(stringr)
+library(arrow)
+library(DropletUtils)
 # Mouse skeletal muscle Visium dataset==========================
 
 # The data comes from this paper:
@@ -271,3 +273,17 @@ sfe_ecm <- SpatialFeatureExperiment(assays = list(counts = ecm),
 sfe_ecm <- addQC(sfe_ecm)
 saveRDS(sfe_ecm, "ecm_slide_seq.rds")
 
+# Xenium FFPE human breast cancer data=========================
+# Downloaded from 10x website
+# https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast
+# Rep 1
+mat <- read10xCounts("Xenium_FFPE_Human_Breast_Cancer_Rep1_cell_feature_matrix.h5")
+cell_info <- vroom("Xenium_FFPE_Human_Breast_Cancer_Rep1_cells.csv.gz")
+cell_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep1_cell_boundaries.parquet")
+nuc_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep1_nucleus_boundaries.parquet")
+names(cell_poly)[1] <- "ID"
+names(nuc_poly)[1] <- "ID"
+cells_sf <- df2sf(cell_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
+nuc_sf <- df2sf(nuc_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
+colData(mat) <- cbind(colData(mat), cell_info[,-1])
+spe <- toSpatialExperiment(mat, spatialCoordsNames = c("x_centroid", "y_centroid"))
