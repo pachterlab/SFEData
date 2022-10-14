@@ -4,11 +4,7 @@
 \alias{McKellarMuscleData}
 \title{Download McKellar et al. mouse skeletal muscle data}
 \usage{
-McKellarMuscleData(
-  dataset = c("full", "small", "small2"),
-  force = FALSE,
-  verbose = TRUE
-)
+McKellarMuscleData(dataset = datasets, force = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{dataset}{Which dataset to use. Whether the full dataset, the first
@@ -25,7 +21,7 @@ A \code{SpatialFeatureExperiment} object.
 }
 \description{
 In the first version of this package, only the first time point, 2 days after
-notexin injury, is available. We plan to add the later time points in later
+notexin injury, is available. We may add the later time points in later
 versions of this package.
 }
 \details{

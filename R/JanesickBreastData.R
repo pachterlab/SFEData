@@ -1,0 +1,30 @@
+#' Xenium FFPE human breast cancer data
+#'
+#' This dataset was downloaded from the
+#' \href{https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast}{10X
+#' website}, and described in the paper High resolution mapping of the breast
+#' cancer tumor microenvironment using integrated single cell, spatial and in
+#' situ analysis of FFPE tissue,
+#' \href{https://doi.org/10.1101/2022.10.06.510405}{Janesick et al}. There are
+#' two samples, which can both be downloaded with this package. For each sample,
+#' the raw gene counts, QC metrics, cell and nuclei segmentation polygons in one
+#' z-plane, and cell centroids are included in the SFE object. The two samples
+#' are in separate SFE objects. A small number of nuclei polygons are invalid
+#' due to self-intersection; these cases were resolved by making a buffer of
+#' distance 0 and then removing the holes. Additional cell metadata provided by
+#' 10X, such as cell area, are also included.
+#' 
+#' As the SFE and Voyager packages are in the experimental stage and they were
+#' originally developed and tested on relatively small Visium datasets, they are
+#' not yet very scalable to larger smFISH datasets. While 10X provided 
+#' transcript spot locations, these are not included in the SFE objects for now
+#' as we are not sure if \code{spatstat} can work with such a large dataset for
+#' spatial point process analyses, nor does SFE integrate with \code{spatstat}.
+#' In a future version of this package, the transcript locations might be added
+#' as a separate dataset, but this is not guaranteed.
+#' 
+#' @inheritParams McKellarMuscleData
+#' @return A \code{SpatialFeatureExperiment} object.
+#' @export
+JanesickBreastData <- .make_data_fun(datasets = c("rep1", "rep2"), ids = 0:1)
+# placeholder ids

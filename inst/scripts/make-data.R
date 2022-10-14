@@ -15,6 +15,7 @@ library(R.utils)
 library(stringr)
 library(arrow)
 library(DropletUtils)
+library(BiocParallel)
 # Mouse skeletal muscle Visium dataset==========================
 
 # The data comes from this paper:
@@ -285,5 +286,119 @@ names(cell_poly)[1] <- "ID"
 names(nuc_poly)[1] <- "ID"
 cells_sf <- df2sf(cell_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
 nuc_sf <- df2sf(nuc_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
+all(st_is_valid(cells_sf))
+# there're some cases of self-intersection
+all(st_is_valid(nuc_sf))
+# In that case, I'll do buffer 0 and then remove the holes
+# Since nuclei in one z plane shouldn't have holes
+ind_invalid <- !st_is_valid(nuc_sf)
+nuc_sf[ind_invalid,] <- nngeo::st_remove_holes(st_buffer(nuc_sf[ind_invalid,], 0))
 colData(mat) <- cbind(colData(mat), cell_info[,-1])
 spe <- toSpatialExperiment(mat, spatialCoordsNames = c("x_centroid", "y_centroid"))
+sfe <- toSpatialFeatureExperiment(spe)
+cellSeg(sfe, withDimnames = FALSE) <- cells_sf
+nucSeg(sfe, withDimnames = FALSE) <- nuc_sf
+sfe <- addQC(sfe)
+colData(sfe)$total_counts <- NULL
+saveRDS(sfe, file = "xenium1.rds")
+
+# Rep 2
+mat <- read10xCounts("Xenium_FFPE_Human_Breast_Cancer_Rep2_cell_feature_matrix.h5")
+cell_info <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep2_cells.parquet")
+cell_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep2_cell_boundaries.parquet")
+nuc_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep2_nucleus_boundaries.parquet")
+names(cell_poly)[1] <- "ID"
+names(nuc_poly)[1] <- "ID"
+cells_sf <- df2sf(cell_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
+nuc_sf <- df2sf(nuc_poly, c("vertex_x", "vertex_y"), geometryType = "POLYGON")
+all(st_is_valid(cells_sf))
+# there're some cases of self-intersection
+all(st_is_valid(nuc_sf))
+
+ind_invalid <- !st_is_valid(nuc_sf)
+nuc_sf[ind_invalid,] <- nngeo::st_remove_holes(st_buffer(nuc_sf[ind_invalid,], 0))
+colData(mat) <- cbind(colData(mat), cell_info[,-1])
+spe <- toSpatialExperiment(mat, spatialCoordsNames = c("x_centroid", "y_centroid"))
+sfe <- toSpatialFeatureExperiment(spe)
+cellSeg(sfe, withDimnames = FALSE) <- cells_sf
+nucSeg(sfe, withDimnames = FALSE) <- nuc_sf
+sfe <- addQC(sfe)
+saveRDS(sfe, file = "xenium2.rds")
+
+# CosMX lung sample=====================
+# Data downloaded from https://nanostring.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/
+# Lung5_Rep1 is used here. 
+# Cell polygons were downloaded from the link on Seurat's vignette: https://www.dropbox.com/s/hl3peavrx92bluy/Lung5_Rep1-polygons.csv?dl=0
+mat <- vroom("Lung5_Rep1/Lung5_Rep1-Flat_files_and_images/Lung5_Rep1_exprMat_file.csv")
+metadata <- vroom("Lung5_Rep1/Lung5_Rep1-Flat_files_and_images/Lung5_Rep1_metadata_file.csv")
+cell_poly <- vroom("Lung5_Rep1-polygons.csv")
+cell_poly <- cell_poly %>% 
+    unite("ID", fov:cellID)
+mat <- mat %>% unite("ID", fov:cell_ID)
+metadata <- metadata %>% unite("ID", fov:cell_ID)
+mat <- mat[match(metadata$ID, mat$ID),]
+cell_poly <- cell_poly %>% 
+    filter(ID %in% metadata$ID)
+cell_sf <- df2sf(cell_poly, spatialCoordsNames = c("x_global_px", "y_global_px"),
+                 geometryType = "POLYGON")
+all(st_is_valid(cell_sf))
+# 2 cells have fewer than 3 vertices. Remove those
+mat <- mat[mat$ID %in% cell_sf$ID,]
+metadata <- metadata[metadata$ID %in% cell_sf$ID,]
+m <- t(as.matrix(mat[,-1]))
+colnames(m) <- mat$ID
+m <- as(m, "dgCMatrix")
+cell_sf <- cell_sf[match(mat$ID, cell_sf$ID),]
+sfe <- SpatialFeatureExperiment(assays = list(counts = m),
+                                colData = metadata[, c(2:3, 6:19)],
+                                spatialCoordsNames = c("CenterX_global_px",
+                                                       "CenterY_global_px"))
+cellSeg(sfe) <- cell_sf
+sfe <- addQC(sfe)
+saveRDS(sfe, "cosmx1.rds")
+
+# Vizgen MERFISH liver data ======================
+# Downloaded from https://console.cloud.google.com/storage/browser/vz-liver-showcase/Liver1Slice1;tab=objects?pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false&pli=1
+library(rhdf5)
+# The cell boundaries are in hdf5 files
+# Each one is for an FOV, and there are 7 z-planes.
+# However, from the few I checked, all the 7 are the same
+# So I wonder why they even bothered to save 7 copies. I'll just use the first one.
+# I think I'll save each z-plane as a separate sf data frame, and keep the sf
+# data frames separate from the main SFE object, which has the centroids.
+# I'm not going through df2sf here.
+h52poly_fov <- function(fn, i) {
+    l <- rhdf5::h5dump(fn)[[1]]
+    cell_ids <- names(l)
+    geometries <- lapply(l, function(m) sf::st_polygon(list(t(m[["zIndex_0"]]$p_0$coordinates[,,1]))))
+    df <- data.frame(geometry = sf::st_sfc(geometries),
+                     ID = cell_ids,
+                     fov = i)
+    sf::st_sf(df)
+}
+fns <- list.files("cell_boundaries", "*.hdf5", full.names = TRUE)
+polys <- bpmapply(h52poly_fov, fn = fns, i = seq_along(fns), SIMPLIFY = FALSE, 
+                  BPPARAM = SnowParam(20, progressbar = TRUE))
+polys <- do.call(bind_rows, polys)
+
+mat <- vroom("Liver1Slice1_cell_by_gene.csv", col_types = cols(...1 = "c"))
+polys <- polys[match(mat$...1, polys$ID),]
+metadata <- vroom("Liver1Slice1_cell_metadata.csv", col_types = cols(...1 = "c"))
+metadata <- metadata[match(mat$...1, metadata$...1),]
+
+m <- as.matrix(mat[,-1])
+m <- as(m, "dgCMatrix")
+rownames(m) <- mat$...1
+m <- t(m)
+
+polys$fov <- NULL
+# Takes a while to make the POINT geometry for the centroids, not too bad
+sfe <- SpatialFeatureExperiment(assays = list(counts = m),
+                                colData = metadata[,-1], 
+                                spatialCoordsNames = c("center_x", "center_y"))
+rownames(polys) <- polys$ID
+polys$ID <- NULL
+cellSeg(sfe) <- polys
+sfe <- addQC(sfe)
+saveRDS(sfe, "merfish_liver1.rds")
+

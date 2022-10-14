@@ -1,7 +1,7 @@
 #' Download McKellar et al. mouse skeletal muscle data
 #'
 #' In the first version of this package, only the first time point, 2 days after
-#' notexin injury, is available. We plan to add the later time points in later
+#' notexin injury, is available. We may add the later time points in later
 #' versions of this package.
 #'
 #' All datasets are \code{SpatialFeatureExperiment} (SFE) objects, with a
@@ -48,14 +48,5 @@
 #' @export
 #' @examples
 #' sfe <- McKellarMuscleData("small")
-McKellarMuscleData <- function(dataset = c("full", "small", "small2"),
-                               force = FALSE, verbose = TRUE) {
-  dataset <- match.arg(dataset)
-  dss <- c("full", "small", "small2")
-  ids <- 7560:7562 # placeholder
-  names(ids) <- dss
-  id <- paste0("EH", ids[dataset])
-  eh <- ExperimentHub()
-  ds <- query(eh, "SFEData")
-  ds[[id, force = force, verbose = verbose]]
-}
+McKellarMuscleData <- .make_data_fun(datasets = c("full", "small", "small2"),
+                                     ids = 7560:7562)
