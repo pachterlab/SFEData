@@ -1,6 +1,6 @@
 Package: SFEData
 Title: Example SpatialFeatureExperiment datasets
-Version: 0.99.3
+Version: 0.99.4
 Authors@R: 
     c(person("Lambda", "Moses", email = "dlu2@caltech.edu", 
     role = c("aut", "cre"),
@@ -31,6 +31,7 @@ biocViews:
     ExperimentHub,
     ExpressionData,
     Mus_musculus_Data,
+    Homo_sapiens_Data,
     SpatialData,
     Tissue,
     SingleCellData

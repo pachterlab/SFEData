@@ -28,10 +28,33 @@ BiocManager::install("SFEData")
 library(SFEData)
 ```
 
-Example spatial transcriptomics datasets with [Simple Features](https://r-spatial.github.io/sf/) annotations as `SpatialFeatureExperiment` objects. In the first version, the only full dataset is a mouse skeletal muscle Visium dataset 2 days after notexin injury from [Large-scale integration of single-cell transcriptomic data captures transitional progenitor states in mouse skeletal muscle regeneration](https://doi.org/10.1038/s42003-021-02810-x). Two small subsets of the full dataset are also included for quick demos. More datasets will be added in later versions.
+Example spatial transcriptomics datasets with [Simple Features](https://r-spatial.github.io/sf/) annotations as `SpatialFeatureExperiment` objects. These are the datasets available from this package and functions to download the datasets:
 
-This package is used extensively in examples and vignettes of the `SpatialFeatureExperiment` and `Voyager` packages. For now, the basic usage:
+Visium:
 
+* Full Visium dataset of the first time point, including spots outside tissue (`McKellarMuscleData()`)
+* Small subset of the full Visium dataset for function examples. (`McKellarMuscleData()`)
+* A second small subset of the full Visium dataset with a different `sample_id` used for function examples involving multiple samples (`McKellarMuscleData()`)
+
+Slide-seq2:
+
+* Slide-seq2 human melanoma brain metastasis dataset (`BiermannMelaMetasData()`)
+* Slide-seq2 human melanoma extracranial metastasis dataset (`BiermannMelaMetasData()`)
+
+Xenium:
+
+* 10X Xenium formalin fixed paraffin embedded (FFPE) Xenium dataset for human
+breast cancer (2 biological replica, `JanesickBreastData()`)
+
+CosMX:
+
+* Nanostring CosMX FFPE human non small cell lung cancer data (`HeNSCLCData()`)
+
+MERFISH:
+
+* Vizgen MERFISH mouse liver data (`VizgenLiverData`)
+
+This package is used extensively in examples and vignettes of the `SpatialFeatureExperiment` and `Voyager` packages. The same function is used for different samples from the same study, and the `dataset` argument determines which sample is downloaded:
 ```{r}
 sfe <- McKellarMuscleData(dataset = "small")
 ```

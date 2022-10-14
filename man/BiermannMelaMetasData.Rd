@@ -2,7 +2,7 @@
 % Please edit documentation in R/BiermannMelaMetasData.R
 \name{BiermannMelaMetasData}
 \alias{BiermannMelaMetasData}
-\title{Melanoma brain metastasis slide-seq2 data}
+\title{Melanoma metastasis slide-seq2 data}
 \usage{
 BiermannMelaMetasData(dataset = datasets, force = FALSE, verbose = TRUE)
 }
@@ -20,13 +20,15 @@ present. Defaults to \code{FALSE}.}
 A \code{SpatialFeatureExperiment} object.
 }
 \description{
-This is one of the human melanoma brain metastasis samples from the paper
-Dissecting the treatment-naive ecosystem of human melanoma brain metastasis,
-\href{https://doi.org/10.1016/j.cell.2022.06.007}{Biermann et al}. The
-dataset is \code{GSM6025935_MBM05_rep1}. The raw counts and cell metadata
-were downloaded from GEO. The raw counts, QC metrics such as number of UMIs
-and genes detected per barcode, and centroid coordinates as \code{sf}
-POINT geometry, are included in the SFE object.
+This function can download one of the human melanoma brain metastasis (MBM)
+samples and one of the melanoma extracranial metastasis (ECM) samples from
+the paper Dissecting the treatment-naive ecosystem of human melanoma brain
+metastasis, \href{https://doi.org/10.1016/j.cell.2022.06.007}{Biermann et
+al}. The datasets are \code{GSM6025935_MBM05_rep1} and
+\code{GSM6025946_ECM01_rep1}. The raw counts and cell metadata were
+downloaded from GEO. The raw counts, QC metrics such as number of UMIs and
+genes detected per barcode, and centroid coordinates as \code{sf} POINT
+geometry, are included in the SFE object.
 }
 \examples{
 sfe <- BiermannMelaMetasData()

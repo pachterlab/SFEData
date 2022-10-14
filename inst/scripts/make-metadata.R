@@ -1,5 +1,6 @@
 # Create metadata.csv
-metadata <- data.frame(
+metadatas <- list()
+metadatas$mckellar <- data.frame(
   Title = c("Visium mouse skeletal muscle 2 days post notexin injury",
             "Small demo subset of mouse skeletal muscle Visium data",
             "Small demo subset of mouse skeletal muscle Visium data 2"),
@@ -20,4 +21,82 @@ metadata <- data.frame(
   DispatchClass = "Rds",
   RDataPath = file.path("SFEData", c("sfe_vis5a.rds", "sfe_vis5a_small.rds", "sfe_small2.rds"))
 )
+
+metadatas$biermann <- data.frame(
+    Title = c("Human melanoma brain metastasis slide-seq2 data",
+              "Human melanoma extracranial metastasis slide-seq2 data"),
+    Description = c("Gene count matrix and bead locations from one melanoma brain metastasis sample as processed by the authors as in the paper 'Dissecting the treatment-naive ecosystem of human melanoma brain metastasis'",
+                    "Gene count matrix and bead locations from one melanoma extracranial metastasis sample as processed by the authors as in the paper 'Dissecting the treatment-naive ecosystem of human melanoma brain metastasis'"),
+    BiocVersion = "3.16",
+    Genome = "GRCh38",
+    SourceType = "CSV",
+    SourceUrl = c("https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM6025935", 
+                  "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM6025946"),
+    SourceVersion = "",
+    Species = "Homo sapiens",
+    TaxonomyId = "9606",
+    Coordinate_1_based = NA,
+    DataProvider = "Columbia University Irving Medical Center",
+    Maintainer = "Lambda Moses <dlu2@caltech.edu>",
+    RDataClass = "SpatialFeatureExperiment",
+    DispatchClass = "Rds",
+    RDataPath = file.path("SFEData", c("mbm_slide_seq.rds", "ecm_slide_seq.rds"))
+)
+
+metadatas$he <- data.frame(
+    Title = "Nanostring FFPE CosMX human NSCLC data",
+    Description = "One of the CosMX formalin fixed paraffin embedded (FFPE) example datasets for human non small cell lung cancer (NSCLC, Lung5_Rep1) from the Nanostring website, described in the paper 'High-plex Multiomic Analysis in FFPE at Subcellular Level by Spatial Molecular Imaging'",
+    BiocVersion = "3.16",
+    Genome = "GRCh38",
+    SourceType = "CSV",
+    SourceUrl = "https://nanostring.com/products/cosmx-spatial-molecular-imager/ffpe-dataset/",
+    SourceVersion = "",
+    Species = "Homo sapiens",
+    TaxonomyId = "9606",
+    Coordinate_1_based = NA,
+    DataProvider = "Nanostring Technologies Inc.",
+    Maintainer = "Lambda Moses <dlu2@caltech.edu>",
+    RDataClass = "SpatialFeatureExperiment",
+    DispatchClass = "Rds",
+    RDataPath = file.path("SFEData", "cosmx1.rds")
+)
+
+metadatas$janesick <- data.frame(
+    Title = paste0("Xenium FFPE human breast cancer data (rep", 1:2, ")"),
+    Description = paste0("Example Xenium dataset of formalin fixed paraffin embedded (FFPE) human breast cancer from 10X Genomics, rep", 1:2, ", described in the paper 'High resolution mapping of the breast cancer tumor microenvironment using integrated single cell'"),
+    BiocVersion = "3.16",
+    Genome = "GRCh38",
+    SourceType = "HDF5",
+    SourceUrl = "https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast",
+    SourceVersion = "",
+    Species = "Homo sapiens",
+    TaxonomyId = "9606",
+    Coordinate_1_based = NA,
+    DataProvider = "10X Genomics",
+    Maintainer = "Lambda Moses <dlu2@caltech.edu>",
+    RDataClass = "SpatialFeatureExperiment",
+    DispatchClass = "Rds",
+    RDataPath = file.path("SFEData", c("xenium1.rds", "xenium2.rds"))
+)
+
+metadatas$vizgen <- data.frame(
+    Title = "Vizgen MERFISH mouse liver data",
+    Description = "This is one of the example datasets from Vizgen's website",
+    BiocVersion = "3.16",
+    Genome = "GRCm38",
+    SourceType = "CSV",
+    SourceUrl = "https://console.cloud.google.com/storage/browser/vz-liver-showcase/Liver1Slice1;tab=objects?pageState=(%22StorageObjectListTable%22:(%22f%22:%22%255B%255D%22))&prefix=&forceOnObjectsSortingFiltering=false&pli=1",
+    SourceVersion = "",
+    Species = "Mus musculus",
+    TaxonomyId = "10090",
+    Coordinate_1_based = NA,
+    DataProvider = "Vizgen Inc.",
+    Maintainer = "Lambda Moses <dlu2@caltech.edu>",
+    RDataClass = "SpatialFeatureExperiment",
+    DispatchClass = "Rds",
+    RDataPath = file.path("SFEData", "merfish_liver1.rds")
+)
+
+metadata <- do.call(rbind, metadatas)
+
 write.csv(metadata, "inst/extdata/metadata.csv", row.names = FALSE)

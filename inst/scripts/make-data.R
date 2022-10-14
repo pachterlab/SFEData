@@ -246,12 +246,15 @@ mbm <- mbm[rowSums(mbm) > 0,]
 # The genes are already in symbols rather than Ensembl IDs
 sfe_mbm <- SpatialFeatureExperiment(assays = list(counts = mbm),
                                     spatialCoords = as.matrix(mbm_coords[,c("xcoord", "ycoord")]))
-addQC <- function(sfe) {
+addQC <- function(sfe, species = "human") {
   mat <- counts(sfe)
   colData(sfe)$nCounts <- colSums(mat)
   colData(sfe)$nGenes <- colSums(mat > 0)
-  mito_genes <- str_detect(rownames(mat), "^MT-")
-  colData(sfe)$prop_mito <- colSums(mat[mito_genes,])/colData(sfe)$nCounts
+  mt_regex <- if (species == "human") "^MT-" else "^Mt-"
+  if (any(str_detect(rownames(mat), mt_regex))) {
+      mito_genes <- str_detect(rownames(mat), "^MT-")
+      colData(sfe)$prop_mito <- colSums(mat[mito_genes,])/colData(sfe)$nCounts
+  }
   rowData(sfe)$means <- rowMeans(mat)
   rowData(sfe)$vars <- rowVars(mat)
   rowData(sfe)$cv2 <- rowData(sfe)$vars/rowData(sfe)$means^2

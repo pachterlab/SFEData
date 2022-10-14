@@ -2,21 +2,32 @@
 #'
 #' Example spatial transcriptomics datasets with
 #' \href{https://r-spatial.github.io/sf/}{Simple Features} annotations as
-#' \code{SpatialFeatureExperiment} objects. In the first version, the only full
-#' dataset is a mouse skeletal muscle Visium dataset 2 days after notexin injury
-#' from 'Large-scale integration of single-cell transcriptomic data captures
-#' transitional progenitor states in mouse skeletal muscle regeneration'. More
-#' datasets will be added in later versions.
+#' \code{SpatialFeatureExperiment} objects.
 #'
 #' @section Datasets:
 #'
 #'   Full Visium dataset of the first time point, including spots outside
-#'   tissue.
+#'   tissue. (\code{\link{McKellarMuscleData}})
 #'
-#'   Small subset of the full dataset for function examples.
+#'   Small subset of the full Visium dataset for function examples.
+#'   (\code{\link{McKellarMuscleData}})
 #'
-#'   A second small subset of the full dataset with a different \code{sample_id}
-#'   used for function examples involving multiple samples.
+#'   A second small subset of the full Visium dataset with a different
+#'   \code{sample_id} used for function examples involving multiple samples.
+#'   (\code{\link{McKellarMuscleData}})
+#'
+#'   Slide-seq2 human melanoma brain metastasis dataset
+#'   (\code{\link{BiermannMelaMetasData}})
+#'
+#'   Slide-seq2 human melanoma extracranial metastasis dataset
+#'   (\code{\link{BiermannMelaMetasData}})
+#'
+#'   10X Xenium formalin fixed paraffin embedded (FFPE) Xenium dataset for human
+#'   breast cancer (2 biological replica, \code{\link{JanesickBreastData}})
+#'   
+#'   Nanostring CosMX FFPE human non small cell lung cancer data (\code{\link{HeNSCLCData}})
+#'   
+#'   Vizgen MERFISH mouse liver data (\code\link{VizgenLiverData})
 #'
 #' @docType package
 #' @name SFEData
