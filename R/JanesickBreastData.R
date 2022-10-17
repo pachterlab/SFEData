@@ -27,5 +27,4 @@
 #' @inheritParams McKellarMuscleData
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
-JanesickBreastData <- .make_data_fun(datasets = c("rep1", "rep2"), ids = 0:1)
-# placeholder ids
+JanesickBreastData <- .make_data_fun(datasets = c("rep1", "rep2"), ids = 7744:7745)

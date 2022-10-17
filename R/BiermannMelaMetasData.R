@@ -28,6 +28,5 @@
 #' @export
 #' @examples
 #' sfe <- BiermannMelaMetasData()
-BiermannMelaMetasData <- .make_data_fun(datasets = c("MBM05_rep1", "ECM01_rep1"), 
-                                        ids = 0)
-# placeholder for id
+BiermannMelaMetasData <- .make_data_fun(datasets = c("MBM05_rep1", "ECM01_rep1"),
+                                        ids = 7741:7742)

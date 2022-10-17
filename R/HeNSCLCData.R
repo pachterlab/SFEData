@@ -16,5 +16,4 @@
 #' @inheritParams McKellarMuscleData
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
-HeNSCLCData <- .make_data_fun(datasets = "Lung5_Rep1", ids = 0)
-# placeholder id
+HeNSCLCData <- .make_data_fun(datasets = "Lung5_Rep1", ids = 7743)

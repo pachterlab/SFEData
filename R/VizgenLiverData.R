@@ -23,4 +23,4 @@
 #' @inheritParams McKellarMuscleData
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
-VizgenLiverData <- .make_data_fun(datasets = "Liver1Slice1", ids = 0)
+VizgenLiverData <- .make_data_fun(datasets = "Liver1Slice1", ids = 7746)
