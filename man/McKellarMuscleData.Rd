@@ -7,9 +7,9 @@
 McKellarMuscleData(dataset = datasets, force = FALSE, verbose = TRUE)
 }
 \arguments{
-\item{dataset}{Which dataset to use. Whether the full dataset, the first
-small subset, or the second small subset. The second small subset has a
-different \code{sample_id}.}
+\item{dataset}{Which dataset to use. Whether the full dataset ("full"), the
+first small subset ("small"), or the second small subset ("small2"). The
+second small subset has a different \code{sample_id}.}
 
 \item{force}{Logical, whether to force redownload if the files are already
 present. Defaults to \code{FALSE}.}

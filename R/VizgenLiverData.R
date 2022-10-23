@@ -21,6 +21,7 @@
 #' with the huge dataset, so this is not included in the SFE object.
 #'
 #' @inheritParams McKellarMuscleData
+#' @param dataset Which dataset to use, for now can only be "Liver1Slice1".
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 VizgenLiverData <- .make_data_fun(datasets = "Liver1Slice1", ids = 7746)

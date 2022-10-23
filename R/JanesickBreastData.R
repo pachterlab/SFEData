@@ -25,6 +25,7 @@
 #' as a separate dataset, but this is not guaranteed.
 #'
 #' @inheritParams McKellarMuscleData
+#' @param dataset Which dataset to use, must be one of "rep1" and "rep2".
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 JanesickBreastData <- .make_data_fun(datasets = c("rep1", "rep2"), ids = 7744:7745)

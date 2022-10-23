@@ -1,6 +1,6 @@
 Package: SFEData
 Title: Example SpatialFeatureExperiment datasets
-Version: 0.99.6
+Version: 0.99.7
 Authors@R: 
     c(person("Lambda", "Moses", email = "dlu2@caltech.edu", 
     role = c("aut", "cre"),

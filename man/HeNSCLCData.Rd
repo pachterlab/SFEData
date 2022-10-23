@@ -7,9 +7,7 @@
 HeNSCLCData(dataset = datasets, force = FALSE, verbose = TRUE)
 }
 \arguments{
-\item{dataset}{Which dataset to use. Whether the full dataset, the first
-small subset, or the second small subset. The second small subset has a
-different \code{sample_id}.}
+\item{dataset}{Which dataset to use, for now can only be "Lung5_Rep1".}
 
 \item{force}{Logical, whether to force redownload if the files are already
 present. Defaults to \code{FALSE}.}

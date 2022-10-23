@@ -24,6 +24,8 @@
 #' geometry, are included in the SFE object.
 #'
 #' @inheritParams McKellarMuscleData
+#' @param dataset Which dataset to use, must be one of "MBM05_rep1" and
+#' "ECM01_rep1".
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 #' @examples
