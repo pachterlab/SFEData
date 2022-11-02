@@ -4,7 +4,7 @@
 \alias{JanesickBreastData}
 \title{Xenium FFPE human breast cancer data}
 \usage{
-JanesickBreastData(dataset = datasets, force = FALSE, verbose = TRUE)
+JanesickBreastData(dataset = c("rep1", "rep2"), force = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{dataset}{Which dataset to use. Whether the full dataset, the first

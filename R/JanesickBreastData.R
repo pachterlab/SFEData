@@ -25,6 +25,17 @@
 #' as a separate dataset, but this is not guaranteed.
 #'
 #' @inheritParams McKellarMuscleData
+#' @importFrom BiocFileCache BiocFileCache bfcrpath
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
-JanesickBreastData <- .make_data_fun(datasets = c("rep1", "rep2"), ids = 7744:7745)
+JanesickBreastData <- function(dataset = c("rep1", "rep2"), force = FALSE,
+                               verbose = TRUE) {
+    dataset <- match.arg(dataset)
+    bfc <- BiocFileCache()
+    url <- if (dataset == "rep1") 
+        "https://caltech.box.com/public/static/9d9s1ixs379q16m6zunpxpeuw1u2o5j5"
+    else
+        "https://caltech.box.com/public/static/y9f16wiaz70ojvteavctcu3k9zs6ctfl"
+    fn <- bfcrpath(bfc, url)
+    readRDS(fn)
+}

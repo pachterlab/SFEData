@@ -16,6 +16,7 @@ library(stringr)
 library(arrow)
 library(DropletUtils)
 library(BiocParallel)
+library(DelayedArray)
 # Mouse skeletal muscle Visium dataset==========================
 
 # The data comes from this paper:
@@ -281,7 +282,8 @@ saveRDS(sfe_ecm, "ecm_slide_seq.rds")
 # Downloaded from 10x website
 # https://www.10xgenomics.com/products/xenium-in-situ/preview-dataset-human-breast
 # Rep 1
-mat <- read10xCounts("Xenium_FFPE_Human_Breast_Cancer_Rep1_cell_feature_matrix.h5")
+sce <- read10xCounts("Xenium_FFPE_Human_Breast_Cancer_Rep1_cell_feature_matrix.h5")
+counts(sce) <- as(realize(counts(sce)), "dgCMatrix")
 cell_info <- vroom("Xenium_FFPE_Human_Breast_Cancer_Rep1_cells.csv.gz")
 cell_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep1_cell_boundaries.parquet")
 nuc_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep1_nucleus_boundaries.parquet")
@@ -296,8 +298,8 @@ all(st_is_valid(nuc_sf))
 # Since nuclei in one z plane shouldn't have holes
 ind_invalid <- !st_is_valid(nuc_sf)
 nuc_sf[ind_invalid,] <- nngeo::st_remove_holes(st_buffer(nuc_sf[ind_invalid,], 0))
-colData(mat) <- cbind(colData(mat), cell_info[,-1])
-spe <- toSpatialExperiment(mat, spatialCoordsNames = c("x_centroid", "y_centroid"))
+colData(sce) <- cbind(colData(sce), cell_info[,-1])
+spe <- toSpatialExperiment(sce, spatialCoordsNames = c("x_centroid", "y_centroid"))
 sfe <- toSpatialFeatureExperiment(spe)
 cellSeg(sfe, withDimnames = FALSE) <- cells_sf
 nucSeg(sfe, withDimnames = FALSE) <- nuc_sf
@@ -306,7 +308,8 @@ colData(sfe)$total_counts <- NULL
 saveRDS(sfe, file = "xenium1.rds")
 
 # Rep 2
-mat <- read10xCounts("Xenium_FFPE_Human_Breast_Cancer_Rep2_cell_feature_matrix.h5")
+sce <- read10xCounts("Xenium_FFPE_Human_Breast_Cancer_Rep2_cell_feature_matrix.h5")
+counts(sce) <- as(realize(counts(sce)), "dgCMatrix")
 cell_info <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep2_cells.parquet")
 cell_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep2_cell_boundaries.parquet")
 nuc_poly <- read_parquet("Xenium_FFPE_Human_Breast_Cancer_Rep2_nucleus_boundaries.parquet")
@@ -320,8 +323,8 @@ all(st_is_valid(nuc_sf))
 
 ind_invalid <- !st_is_valid(nuc_sf)
 nuc_sf[ind_invalid,] <- nngeo::st_remove_holes(st_buffer(nuc_sf[ind_invalid,], 0))
-colData(mat) <- cbind(colData(mat), cell_info[,-1])
-spe <- toSpatialExperiment(mat, spatialCoordsNames = c("x_centroid", "y_centroid"))
+colData(sce) <- cbind(colData(sce), cell_info[,-1])
+spe <- toSpatialExperiment(sce, spatialCoordsNames = c("x_centroid", "y_centroid"))
 sfe <- toSpatialFeatureExperiment(spe)
 cellSeg(sfe, withDimnames = FALSE) <- cells_sf
 nucSeg(sfe, withDimnames = FALSE) <- nuc_sf
