@@ -14,6 +14,7 @@
 #' immunofluorescence signal, and etc. are included in the SFE object.
 #'
 #' @inheritParams McKellarMuscleData
+#' @param dataset Which dataset to use, for now can only be "Lung5_Rep1".
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 HeNSCLCData <- .make_data_fun(datasets = "Lung5_Rep1", ids = 7743)

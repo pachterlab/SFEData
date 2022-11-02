@@ -36,11 +36,11 @@
 #' intensity and then converting the mask into polygons with OpenCV. Small
 #' pieces which are debris were removed.
 #'
-#' @param dataset Which dataset to use. Whether the full dataset, the first
-#' small subset, or the second small subset. The second small subset has a
-#' different \code{sample_id}.
+#' @param dataset Which dataset to use. Whether the full dataset ("full"), the
+#'   first small subset ("small"), or the second small subset ("small2"). The
+#'   second small subset has a different \code{sample_id}.
 #' @param force Logical, whether to force redownload if the files are already
-#' present. Defaults to \code{FALSE}.
+#'   present. Defaults to \code{FALSE}.
 #' @param verbose Whether to display progress of download.
 #' @importFrom ExperimentHub ExperimentHub
 #' @importFrom AnnotationHub query

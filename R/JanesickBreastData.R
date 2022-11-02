@@ -26,6 +26,7 @@
 #'
 #' @inheritParams McKellarMuscleData
 #' @importFrom BiocFileCache BiocFileCache bfcrpath
+#' @param dataset Which dataset to use, must be one of "rep1" and "rep2".
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 JanesickBreastData <- function(dataset = c("rep1", "rep2"), force = FALSE,
