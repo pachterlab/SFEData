@@ -1,6 +1,6 @@
 Package: SFEData
 Title: Example SpatialFeatureExperiment datasets
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: 
     c(person("Lambda", "Moses", email = "dlu2@caltech.edu", 
     role = c("aut", "cre"),
@@ -15,6 +15,7 @@ Description:
     skeletal muscle, human melanoma metastasis, human lung, breast cancer, and
     mouse liver.
 Imports:
+    BiocFileCache,
     AnnotationHub,
     ExperimentHub
 Suggests: 
