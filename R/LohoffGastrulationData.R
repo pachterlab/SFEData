@@ -26,7 +26,7 @@ LohoffGastrulationData <- function(dataset = c("rep1", "rep2", "rep3"), force = 
   url <- swtich(dataset,
     rep1 = "https://caltech.box.com/s/ul1jl6tjwir3szat00hu5ir29vly5qzt", 
     rep2 = "https://caltech.box.com/s/2gfupqpu3a1tvlahfpnq5tpv0a58i4o9",
-    rep3 = "https://caltech.box.com/s/ul1jl6tjwir3szat00hu5ir29vly5qzt"
+    rep3 = "https://caltech.box.com/s/ulrqr1gk7oh21h9ejgua1xajs6dsbvrj"
   )
   
   bfc <- BiocFileCache()
