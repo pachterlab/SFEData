@@ -97,6 +97,27 @@ metadatas$vizgen <- data.frame(
     RDataPath = file.path("SFEData", "merfish_liver1.rds")
 )
 
+metadatas$lohoff <- data.frame(
+  Title = paste0("seqFISH mouse gastrulation data (rep", 1:3, ")"),
+  Description = paste0(
+    "Example seqFISH dataset of tissue sections of mouse embryos at the 8–12 somite stage by the Marioni lab at the Cancer Research UK Cambridge Institute,
+    rep", 1:3, ", described in the paper 'Integration of spatial and single-cell transcriptomic data elucidates mouse organogenesis'"),
+  BiocVersion = "3.16",
+  Genome = "GRCm38",
+  SourceType = "Rds",
+  SourceUrl = "https://content.cruk.cam.ac.uk/jmlab/SpatialMouseAtlas2020/",
+  SourceVersion = "",
+  Species = "Mus musculus",
+  TaxonomyId = "10090",
+  Coordinate_1_based = NA,
+  DataProvider = " Cancer Research UK Cambridge Institute",
+  Maintainer = "Kayla Jackson <kaylajac2@caltech.edu>",
+  RDataClass = "SpatialFeatureExperiment",
+  DispatchClass = "Rds",
+  RDataPath = file.path("SFEData", c("seqfish_em1.rds", "seqfish_em2.rds", "seqfish_em3.rds"))
+)
+
+
 metadata <- do.call(rbind, metadatas)
 
 write.csv(metadata, "inst/extdata/metadata.csv", row.names = FALSE)
