@@ -13,6 +13,8 @@ library(Matrix)
 library(Voyager)
 library(R.utils)
 library(stringr)
+library(glue)
+library(rlang)
 library(arrow)
 library(DropletUtils)
 library(BiocParallel)
@@ -407,4 +409,71 @@ polys$ID <- NULL
 cellSeg(sfe) <- polys
 sfe <- addQC(sfe)
 saveRDS(sfe, "merfish_liver1.rds")
+
+
+# Mouse gastrulation embryo seqFISH data====================
+# Data downloaded from hhttps://content.cruk.cam.ac.uk/jmlab/SpatialMouseAtlas2020/
+
+library(magrittr)
+
+counts <- readRDS('counts.Rds')
+meta <- readRDS('metadata.Rds')
+seg <- readRDS('segmentation_vertices.Rds')
+
+# create sf dataframe for all cells
+polygos <- seg %>% 
+  select(ID = uniqueID, contains("segmentation"))
+
+names(polygos)[-1] <- c('x', 'y')
+
+# 6 low qual cells are removed because they lack segmentation data
+polygos <- df2sf(polygos, geometryType = "POLYGON")
+
+
+# make valid polygons for objs with self-intersections
+all(st_is_valid(polygos))
+
+inv_inds <- which(!st_is_valid(polygos))
+fixed_poly <- st_make_valid(polygos[inv_inds,], geos_method = 'valid_structure')
+
+polygos[inv_inds,] <- fixed_poly
+
+# add back cells lacking segmentation data
+# add empty geom for dropped cells
+mask <- !(meta$uniqueID %in% polygos$ID)
+if (sum(mask)) {
+  df <- data.frame(ID = meta$uniqueID[mask])
+  nr <- nrow(df)
+  
+  expr_ <- glue::glue("st_sfc({str_flatten(rep('st_polygon()', nr), ',')})")
+  st_geometry(df) <- eval(parse_expr(expr_))
+  
+  polygos <- rbind(polygos, df)
+}
+
+polygos %<>%  mutate(embryo = str_extract(ID, "(embryo[0-9]+)"))
+
+# create sfe object for each embryo
+bio_reps <- unique(meta$embryo)
+
+for (em in bio_reps){
+  mask_em <- meta$embryo %in% em
+  
+  # subset meta, counts, segmentation for embryo
+  meta_em <- meta %>% filter(embryo %in% em) %>% select(-contains('segmentation'))
+  counts_em <- counts[, mask_em]
+  
+  poly_em <- polygos %>% filter(embryo %in% em)  %>% select(-embryo)
+  
+  sfe <- SpatialFeatureExperiment(
+    assays = list(counts = counts_em),
+    colData = meta_em,
+    colGeometries = list(seg_coords = poly_em)
+  )
+  
+  fn = glue::glue("seqfish_em{str_extract(em, '[0-9]')}.Rds")
+
+  saveRDS(sfe, file = fn)
+}
+
 
