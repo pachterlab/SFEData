@@ -98,7 +98,7 @@ metadatas$vizgen <- data.frame(
 )
 
 metadatas$lohoff <- data.frame(
-  Title = paste0("seqFISH mouse gastrulation data (rep", 1:3, ")"),
+  Title = paste0("seqFISH mouse gastrulation data (rep ", 1:3, ")"),
   Description = paste0(
     "Example seqFISH dataset of tissue sections of mouse embryos at the 8–12 somite stage by the Marioni lab at the Cancer Research UK Cambridge Institute, rep", 1:3, ", described in the paper 'Integration of spatial and single-cell transcriptomic data elucidates mouse organogenesis'"),
   BiocVersion = "3.17",
