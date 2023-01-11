@@ -100,9 +100,8 @@ metadatas$vizgen <- data.frame(
 metadatas$lohoff <- data.frame(
   Title = paste0("seqFISH mouse gastrulation data (rep", 1:3, ")"),
   Description = paste0(
-    "Example seqFISH dataset of tissue sections of mouse embryos at the 8–12 somite stage by the Marioni lab at the Cancer Research UK Cambridge Institute,
-    rep", 1:3, ", described in the paper 'Integration of spatial and single-cell transcriptomic data elucidates mouse organogenesis'"),
-  BiocVersion = "3.16",
+    "Example seqFISH dataset of tissue sections of mouse embryos at the 8–12 somite stage by the Marioni lab at the Cancer Research UK Cambridge Institute, rep", 1:3, ", described in the paper 'Integration of spatial and single-cell transcriptomic data elucidates mouse organogenesis'"),
+  BiocVersion = "3.17",
   Genome = "GRCm38",
   SourceType = "RDS",
   SourceUrl = "https://content.cruk.cam.ac.uk/jmlab/SpatialMouseAtlas2020/",
@@ -111,7 +110,7 @@ metadatas$lohoff <- data.frame(
   TaxonomyId = "10090",
   Coordinate_1_based = NA,
   DataProvider = "Cancer Research UK Cambridge Institute",
-  Maintainer = "Kayla Jackson <kaylajac2@caltech.edu>",
+  Maintainer = "Kayla Jackson <kaylajac@caltech.edu>",
   RDataClass = "SpatialFeatureExperiment",
   DispatchClass = "Rds",
   RDataPath = file.path("SFEData", c("seqfish_em1.rds", "seqfish_em2.rds", "seqfish_em3.rds"))
