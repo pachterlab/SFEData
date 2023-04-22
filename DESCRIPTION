@@ -1,10 +1,13 @@
 Package: SFEData
 Title: Example SpatialFeatureExperiment datasets
-Version: 1.1.4
+Version: 1.1.5
 Authors@R: 
     c(person("Lambda", "Moses", email = "dlu2@caltech.edu", 
     role = c("aut", "cre"),
     comment = c(ORCID = "0000-0002-7092-9427")),
+    person("Kayla", "Jackson", email = "kaylajac@caltech.edu",
+    role = c("aut"),
+    comment = c(ORCID = "0000-0001-6483-0108")),
     person("Lior", "Pachter", email = "lpachter@caltech.edu",
     role = c("aut", "ths"),
     comment = c(ORCID = "0000-0002-9164-6231")))
@@ -26,7 +29,7 @@ Suggests:
 License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 biocViews: 
     ExperimentHub,
     ExpressionData,

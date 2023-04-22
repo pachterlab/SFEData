@@ -33,6 +33,6 @@ breast cancer (2 biological replica, \code{\link{JanesickBreastData}})
 
 Nanostring CosMX FFPE human non small cell lung cancer data (\code{\link{HeNSCLCData}})
 
-Vizgen MERFISH mouse liver data (\code\link{VizgenLiverData})
+Vizgen MERFISH mouse liver data (\code{\link{VizgenLiverData}})
 }
 

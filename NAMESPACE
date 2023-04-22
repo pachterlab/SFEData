@@ -3,6 +3,7 @@
 export(BiermannMelaMetasData)
 export(HeNSCLCData)
 export(JanesickBreastData)
+export(LohoffGastrulationData)
 export(McKellarMuscleData)
 export(VizgenLiverData)
 importFrom(AnnotationHub,query)

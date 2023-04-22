@@ -52,7 +52,11 @@ CosMX:
 
 MERFISH:
 
-* Vizgen MERFISH mouse liver data (`VizgenLiverData`)
+* Vizgen MERFISH mouse liver data (`VizgenLiverData()`)
+
+seqFISH:
+
+* seqFISH mouse gastrulation data (`LohoffGastrulationData()`)
 
 This package is used extensively in examples and vignettes of the `SpatialFeatureExperiment` and `Voyager` packages. The same function is used for different samples from the same study, and the `dataset` argument determines which sample is downloaded:
 ```{r}
