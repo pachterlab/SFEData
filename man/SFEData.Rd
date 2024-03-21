@@ -2,6 +2,7 @@
 % Please edit documentation in R/package_info.R
 \docType{package}
 \name{SFEData}
+\alias{SFEData-package}
 \alias{SFEData}
 \title{Example SpatialFeatureExperiment datasets}
 \description{
@@ -11,6 +12,9 @@ Example spatial transcriptomics datasets with
 }
 \section{Datasets}{
 
+
+Below are datasets that are already SFE objects, used in examples and
+vignettes:
 
 Full Visium dataset of the first time point, including spots outside
 tissue. (\code{\link{McKellarMuscleData}})
@@ -31,8 +35,40 @@ Slide-seq2 human melanoma extracranial metastasis dataset
 10X Xenium formalin fixed paraffin embedded (FFPE) Xenium dataset for human
 breast cancer (2 biological replica, \code{\link{JanesickBreastData}})
 
-Nanostring CosMX FFPE human non small cell lung cancer data (\code{\link{HeNSCLCData}})
+Nanostring CosMX FFPE human non small cell lung cancer data
+(\code{\link{HeNSCLCData}})
 
 Vizgen MERFISH mouse liver data (\code{\link{VizgenLiverData}})
+
+Below are small subsets of datasets in the original output format used to
+demonstrate and test data reading functions in the SFE package:
+
+Unpublished Vizgen MERFISH human brain cancer data (\code{\link{VizgenOutput}})
+
+Subset of CosMX mouse brain data (\code{\link{CosMXOutput}})
+
+Subset of Xenium output from the mouse brain, generated with Xenium
+Onboarding Analysis v1 (\code{\link{XeniumOutput}})
+
+Subset of Xenium output from the human pancreas, generated with Xenium
+Onboarding Analysis v2 (\code{\link{XeniumOutput}})
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/pachterlab/SFEData}
+  \item Report bugs at \url{https://github.com/pachterlab/SFEData/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Lambda Moses \email{dlu2@caltech.edu} (\href{https://orcid.org/0000-0002-7092-9427}{ORCID})
+
+Authors:
+\itemize{
+  \item Kayla Jackson \email{kaylajac@caltech.edu} (\href{https://orcid.org/0000-0001-6483-0108}{ORCID})
+  \item Lior Pachter \email{lpachter@caltech.edu} (\href{https://orcid.org/0000-0002-9164-6231}{ORCID}) [thesis advisor]
+}
+
+}

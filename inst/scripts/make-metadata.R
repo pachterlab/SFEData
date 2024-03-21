@@ -116,6 +116,64 @@ metadatas$lohoff <- data.frame(
   RDataPath = file.path("SFEData", c("seqfish_em1.rds", "seqfish_em2.rds", "seqfish_em3.rds"))
 )
 
+metadatas$vizgen_out <- data.frame(
+  Title = c("Small subset of Vizgen output from human brain cancer data",
+            "Small subset of Vizgen output from human brain cancer data, Cellpose output"),
+  Description = c("Small subset of Vizgen output from in house unpublished brain cancer data, used to demonstrate and test readVizgen()",
+                  "Small subset of Vizgen output from in house unpublished brain cancer data, with CellPose cell segmentation directory, used to demonstrate and test readVizgen()"),
+  BiocVersion = "3.19",
+  Genome = "GRCh38",
+  SourceType = "tar.gz",
+  SourceUrl = "https://www.dkfz.de/en/single-cell-sequencing/open-lab.html",
+  SourceVersion = "",
+  Species = "Homo sapiens",
+  TaxonomyId = "9606",
+  Coordinate_1_based = NA,
+  DataProvider = "scOpenLab DKFZ",
+  Maintainer = "Lambda Moses <dlu2@caltech.edu>",
+  RDataClass = "SpatialFeatureExperiment",
+  DispatchClass = "FilePath",
+  RDataPath = file.path("SFEData", c("vizgen.tar.gz", "vizgen_cellpose.tar.gz"))
+)
+
+metadatas$cosmx <- data.frame(
+  Title = "Small subset of CosMX output from mouse quarter brain data",
+  Description = "Small subset of CosMX output from mouse quarter brain data including the hippocampus downloaded from the Nanostring website, used to demonstrate and test readCosMX()",
+  BiocVersion = "3.19",
+  Genome = "GRCm38",
+  SourceType = "tar.gz",
+  SourceUrl = "https://nanostring.com/resources/coronal-hippocampus-and-cortex-basic-data-files/",
+  SourceVersion = "",
+  Species = "Mus musculus",
+  TaxonomyId = "10090",
+  Coordinate_1_based = NA,
+  DataProvider = "Nanostring",
+  Maintainer = "Lambda Moses <dlu2@caltech.edu>",
+  RDataClass = "SpatialFeatureExperiment",
+  DispatchClass = "FilePath",
+  RDataPath = file.path("SFEData", "cosmx.tar.gz")
+)
+
+metadatas$xenium_out <- data.frame(
+  Title = c("Xenium Onboarding Analysis v1 output from mouse brain",
+            "Small subset of Xenium Onboarding Analysis v2 output from human pancreas"),
+  Description = c("'Tiny subset' of Xenium mouse brain data from 10X website, generated with Xenium Onboarding Analysis v1, without the zarr files and only with lower resolution images, to demonstrate and test readXenium()",
+                  "Small subset of Xenium human pancreas data from 10X website, generated with Xenium Onboarding Analysis v2, without the zarr files and only with lower resolution images, to demonstrate and test readXenium()"),
+  BiocVersion = "3.19",
+  Genome = c("GRCm38", "GRCh38"),
+  SourceType = "Zip",
+  SourceUrl = c("https://cf.10xgenomics.com/samples/xenium/1.0.2/Xenium_V1_FF_Mouse_Brain_Coronal_Subset_CTX_HP/Xenium_V1_FF_Mouse_Brain_Coronal_Subset_CTX_HP_outs.zip",
+                "https://cf.10xgenomics.com/samples/xenium/2.0.0/Xenium_V1_human_Pancreas_FFPE/Xenium_V1_human_Pancreas_FFPE_outs.zip"),
+  SourceVersion = "",
+  Species = c("Mus musculus", "Homo sapiens"),
+  TaxonomyId = c("10090", "9606"),
+  Coordinate_1_based = NA,
+  DataProvider = "10X Genomics",
+  Maintainer = "Lambda Moses <dlu2@caltech.edu>",
+  RDataClass = "SpatialFeatureExperiment",
+  DispatchClass = "FilePath",
+  RDataPath = file.path("SFEData", c("xenium.tar.gz", "xenium2.tar.gz"))
+)
 
 metadata <- do.call(rbind, metadatas)
 
