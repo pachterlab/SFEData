@@ -4,7 +4,12 @@
 \alias{XeniumOutput}
 \title{Xenium output}
 \usage{
-XeniumOutput(dataset = datasets, force = FALSE, verbose = TRUE)
+XeniumOutput(
+  dataset = datasets,
+  file_path = ".",
+  force = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{dataset}{Either "v1" or "v2", as described above.}

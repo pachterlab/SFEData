@@ -4,7 +4,12 @@
 \alias{BiermannMelaMetasData}
 \title{Melanoma metastasis slide-seq2 data}
 \usage{
-BiermannMelaMetasData(dataset = datasets, force = FALSE, verbose = TRUE)
+BiermannMelaMetasData(
+  dataset = datasets,
+  file_path = ".",
+  force = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{dataset}{Which dataset to use, must be one of "MBM05_rep1" and

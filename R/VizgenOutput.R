@@ -11,4 +11,4 @@
 #' a parquet file.
 #' @return Path to the tarball containing the output directory.
 #' @export
-VizgenOutput <- .make_data_fun(datasets = c("hdf5", "cellpose"), ids = 0)
+VizgenOutput <- .make_data_fun(datasets = c("hdf5", "cellpose"), ids = 9478:9479)

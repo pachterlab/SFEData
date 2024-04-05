@@ -90,4 +90,4 @@ write_csv(spots, "inst/extdata/cosmx/Run5642_S3_Quarter_tx_file.csv")
 write_csv(polys, "inst/extdata/cosmx/Run5642_S3_Quarter-polygons.csv")
 write_csv(meta, "inst/extdata/cosmx/Run5642_S3_Quarter_metadata_file.csv")
 
-tar("cosmx.tar.gz", "inst/extdata/cosmx/")
+tar("cosmx.tar.gz", "cosmx/")

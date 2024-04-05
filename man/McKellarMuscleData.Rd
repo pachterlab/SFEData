@@ -4,7 +4,12 @@
 \alias{McKellarMuscleData}
 \title{Download McKellar et al. mouse skeletal muscle data}
 \usage{
-McKellarMuscleData(dataset = datasets, force = FALSE, verbose = TRUE)
+McKellarMuscleData(
+  dataset = datasets,
+  file_path = ".",
+  force = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{dataset}{Which dataset to use. Whether the full dataset ("full"), the

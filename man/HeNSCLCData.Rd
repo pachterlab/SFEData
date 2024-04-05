@@ -4,7 +4,7 @@
 \alias{HeNSCLCData}
 \title{Nanostring FFPE CosMX human NSCLC data}
 \usage{
-HeNSCLCData(dataset = datasets, force = FALSE, verbose = TRUE)
+HeNSCLCData(dataset = datasets, file_path = ".", force = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{dataset}{Which dataset to use, for now can only be "Lung5_Rep1".}

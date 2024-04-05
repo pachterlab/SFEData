@@ -4,7 +4,12 @@
 \alias{LohoffGastrulationData}
 \title{seqFISH mouse gastrulation dataset}
 \usage{
-LohoffGastrulationData(dataset = datasets, force = FALSE, verbose = TRUE)
+LohoffGastrulationData(
+  dataset = datasets,
+  file_path = ".",
+  force = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{dataset}{Which dataset to use, must be one of "rep1", "rep2", and "rep3".}

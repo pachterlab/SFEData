@@ -4,7 +4,7 @@
 \alias{CosMXOutput}
 \title{CosMX output from mouse brain}
 \usage{
-CosMXOutput(dataset = datasets, force = FALSE, verbose = TRUE)
+CosMXOutput(dataset = datasets, file_path = ".", force = FALSE, verbose = TRUE)
 }
 \arguments{
 \item{dataset}{Can only be "subset1".}

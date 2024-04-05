@@ -167,5 +167,5 @@ parq <- parq[,names(df)]
 
 st_write_parquet(parq, file.path(dir_use, "cellpose_micron_space.parquet"))
 
-tar("vizgen.tar.gz", "inst/extdata/vizgen_cellbound/")
-tar("vizgen_cellpose.tar.gz", "inst/extdata/vizgen_cellbound_Cellpose/")
+tar("vizgen.tar.gz", "vizgen_cellbound/")
+tar("vizgen_cellpose.tar.gz", "vizgen_cellbound_Cellpose/")

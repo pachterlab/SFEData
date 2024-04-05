@@ -4,7 +4,12 @@
 \alias{VizgenOutput}
 \title{Vizgen MERFISH output from human brain cancer}
 \usage{
-VizgenOutput(dataset = datasets, force = FALSE, verbose = TRUE)
+VizgenOutput(
+  dataset = datasets,
+  file_path = ".",
+  force = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{dataset}{Which dataset to use, can be "hdf5" where cell segmentations

@@ -11,4 +11,4 @@
 #' @param dataset Can only be "subset1".
 #' @return Path to the tarball containing the output directory.
 #' @export
-CosMXOutput <- .make_data_fun(datasets = "subset1", ids = 0)
+CosMXOutput <- .make_data_fun(datasets = "subset1", ids = 9480)

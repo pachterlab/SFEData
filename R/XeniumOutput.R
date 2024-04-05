@@ -16,4 +16,4 @@
 #' @param dataset Either "v1" or "v2", as described above.
 #' @return Path to the tarball containing the output directory.
 #' @export
-XeniumOutput <- .make_data_fun(datasets = c("v1", "v2"), ids = 0)
+XeniumOutput <- .make_data_fun(datasets = c("v1"), ids = 9481)

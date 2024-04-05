@@ -1,5 +1,5 @@
 .make_data_fun <- function(datasets, ids) {
-    function(dataset = datasets,
+    function(dataset = datasets, file_path = ".",
              force = FALSE, verbose = TRUE) {
         dataset <- match.arg(dataset)
         ids <- ids
@@ -7,7 +7,20 @@
         id <- paste0("EH", ids[dataset])
         eh <- ExperimentHub()
         ds <- query(eh, "SFEData")
-        ds[[id, force = force, verbose = verbose]]
+        out <- ds[[id, force = force, verbose = verbose]]
+        if (is.character(out)) {
+            untar(out, exdir = file_path)
+            # To temporarily deal with my stupid mistake before Lori corrects it
+            if (list.dirs(file_path, recursive = FALSE) == file.path(file_path, "inst")) {
+                browser()
+                path_use <- list.dirs(file.path(file_path, "inst", "extdata"), recursive = FALSE)
+                out <- file.path(file_path, basename(path_use))
+                file.rename(path_use, out)
+                unlink(file.path(file_path, "inst"), recursive = TRUE)
+            }
+            cat("The downloaded files are in", out, "\n")
+        }
+        return(out)
     }
 }
 
