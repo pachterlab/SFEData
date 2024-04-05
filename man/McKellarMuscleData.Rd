@@ -16,6 +16,9 @@ McKellarMuscleData(
 first small subset ("small"), or the second small subset ("small2"). The
 second small subset has a different \code{sample_id}.}
 
+\item{file_path}{Path to save downloaded files for the \code{*Output}
+functions which don't return an SFE object.}
+
 \item{force}{Logical, whether to force redownload if the files are already
 present. Defaults to \code{FALSE}.}
 

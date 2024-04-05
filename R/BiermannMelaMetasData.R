@@ -1,4 +1,5 @@
-.make_data_fun <- function(datasets, ids) {
+#' @importFrom utils untar
+.make_data_fun <- function(datasets, ids, fn) {
     function(dataset = datasets, file_path = ".",
              force = FALSE, verbose = TRUE) {
         dataset <- match.arg(dataset)
@@ -10,14 +11,8 @@
         out <- ds[[id, force = force, verbose = verbose]]
         if (is.character(out)) {
             untar(out, exdir = file_path)
-            # To temporarily deal with my stupid mistake before Lori corrects it
-            if (list.dirs(file_path, recursive = FALSE) == file.path(file_path, "inst")) {
-                browser()
-                path_use <- list.dirs(file.path(file_path, "inst", "extdata"), recursive = FALSE)
-                out <- file.path(file_path, basename(path_use))
-                file.rename(path_use, out)
-                unlink(file.path(file_path, "inst"), recursive = TRUE)
-            }
+            names(fn) <- datasets
+            out <- file.path(file_path, fn[dataset]) |> normalizePath()
             cat("The downloaded files are in", out, "\n")
         }
         return(out)
@@ -38,7 +33,7 @@
 #'
 #' @inheritParams McKellarMuscleData
 #' @param dataset Which dataset to use, must be one of "MBM05_rep1" and
-#' "ECM01_rep1".
+#'   "ECM01_rep1".
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 #' @examples

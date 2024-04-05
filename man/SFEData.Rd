@@ -67,6 +67,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Alik Huseynov (\href{https://orcid.org/0000-0002-1438-4389}{ORCID})
   \item Kayla Jackson \email{kaylajac@caltech.edu} (\href{https://orcid.org/0000-0001-6483-0108}{ORCID})
   \item Lior Pachter \email{lpachter@caltech.edu} (\href{https://orcid.org/0000-0002-9164-6231}{ORCID}) [thesis advisor]
 }

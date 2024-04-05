@@ -14,6 +14,9 @@ JanesickBreastData(
 \arguments{
 \item{dataset}{Which dataset to use, must be one of "rep1" and "rep2".}
 
+\item{file_path}{Path to save downloaded files for the \code{*Output}
+functions which don't return an SFE object.}
+
 \item{force}{Logical, whether to force redownload if the files are already
 present. Defaults to \code{FALSE}.}
 

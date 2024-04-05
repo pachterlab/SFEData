@@ -9,6 +9,9 @@ CosMXOutput(dataset = datasets, file_path = ".", force = FALSE, verbose = TRUE)
 \arguments{
 \item{dataset}{Can only be "subset1".}
 
+\item{file_path}{Path to save downloaded files for the \code{*Output}
+functions which don't return an SFE object.}
+
 \item{force}{Logical, whether to force redownload if the files are already
 present. Defaults to \code{FALSE}.}
 
@@ -21,7 +24,7 @@ Path to the tarball containing the output directory.
 This is a small subset of the CosMX output from the mouse quarter brain
 downloaded from the
 \href{https://nanostring.com/resources/coronal-hippocampus-and-cortex-basic-data-files/}{Nanostring
-website}. When downloaded, the files are in the output format of Vizgen, not
+website}. When downloaded, the files are in the output format of CosMX, not
 an SFE object. The purpose of this dataset is to demonstrate and test
-\code{\link{readVizgen}}.
+\code{readCosMX} in SFE.
 }

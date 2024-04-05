@@ -49,18 +49,32 @@ breast cancer (2 biological replica, `JanesickBreastData()`)
 CosMX:
 
 * Nanostring CosMX FFPE human non small cell lung cancer data (`HeNSCLCData()`)
+* CosMX output subset from mouse quarter brain (`CosMXOutput()`)
 
 MERFISH:
 
 * Vizgen MERFISH mouse liver data (`VizgenLiverData()`)
+* Vizgen output subset of unpublished brain cancer data (`VizgenOutput()`)
 
 seqFISH:
 
 * seqFISH mouse gastrulation data (`LohoffGastrulationData()`)
 
+Xenium:
+* Xenium output subset of mouse brain data (`XeniumOutput()`)
+
 This package is used extensively in examples and vignettes of the `SpatialFeatureExperiment` and `Voyager` packages. The same function is used for different samples from the same study, and the `dataset` argument determines which sample is downloaded:
 ```{r}
 sfe <- McKellarMuscleData(dataset = "small")
+```
+
+The outputs (in `*Output()`) are not SFE objects, but a small subset in the format of the standard output of the technology, used to unit test read functions. Where the files are saved is controlled by the `file_path` argument.
+```{r}
+(fp <- CosMXOutput(file_path = "foo"))
+```
+
+```{r}
+unlink("foo", recursive = TRUE)
 ```
 
 ```{r}
