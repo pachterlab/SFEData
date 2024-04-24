@@ -12,8 +12,13 @@
 #' time, the zarr files in the original output were removed since they are not
 #' used by the SFE package. Also, only lower resolution images are kept.
 #'
+#' For the v1 output, the cell and nucleus boundary parquet files have two
+#' versions, one with the arrow raw bytes and the other without. There are no
+#' longer raw bytes since XOA v1.4.
+#'
 #' @inheritParams McKellarMuscleData
 #' @param dataset Either "v1" or "v2", as described above.
 #' @return Path to the tarball containing the output directory.
 #' @export
-XeniumOutput <- .make_data_fun(datasets = c("v1"), ids = 9481, fn = "xenium_lr")
+XeniumOutput <- .make_data_fun(datasets = c("v1", "v2"), ids = c(9481,0), fn = "xenium_lr")
+# 0 for placeholder before I upload the data

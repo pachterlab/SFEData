@@ -38,3 +38,8 @@ formats, hence the separate subsets used for testing. To reduce download
 time, the zarr files in the original output were removed since they are not
 used by the SFE package. Also, only lower resolution images are kept.
 }
+\details{
+For the v1 output, the cell and nucleus boundary parquet files have two
+versions, one with the arrow raw bytes and the other without. There are no
+longer raw bytes since XOA v1.4.
+}
