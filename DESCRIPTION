@@ -29,6 +29,7 @@ Suggests:
     BiocStyle,
     knitr,
     rmarkdown,
+    SeuratObject,
     SpatialFeatureExperiment,
     testthat (>= 3.0.0)
 License: Artistic-2.0

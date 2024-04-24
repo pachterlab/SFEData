@@ -52,6 +52,9 @@ Onboarding Analysis v1 (\code{\link{XeniumOutput}})
 
 Subset of Xenium output from the human pancreas, generated with Xenium
 Onboarding Analysis v2 (\code{\link{XeniumOutput}})
+
+Seurat object for unit testing function to convert Seurat objects to SFE
+(\code{\link{SeuratTestData}})
 }
 
 \seealso{
