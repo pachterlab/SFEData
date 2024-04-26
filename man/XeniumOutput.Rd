@@ -5,7 +5,7 @@
 \title{Xenium output}
 \usage{
 XeniumOutput(
-  dataset = datasets,
+  dataset = c("v1", "v2"),
   file_path = ".",
   force = FALSE,
   verbose = TRUE
@@ -42,4 +42,7 @@ used by the SFE package. Also, only lower resolution images are kept.
 For the v1 output, the cell and nucleus boundary parquet files have two
 versions, one with the arrow raw bytes and the other without. There are no
 longer raw bytes since XOA v1.4.
+
+To make the test data smaller, the transcript spots have been down sampled
+in the v1 data but not in v2.
 }
