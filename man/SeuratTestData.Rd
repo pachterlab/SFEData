@@ -15,7 +15,9 @@ SeuratTestData(
 \item{dataset}{Which dataset to use. Description of the datasets:
 \describe{
 \item{Visium}{From \code{SeuratData} (ie \code{stxBrain.SeuratData}), subsetted to keep first 50 genes}
-\item{VisiumHD}{Visium HD mouse brain data from the \href{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-brain-he}{10X website},
+\item{VisiumHD8}{Visium HD mouse brain data from the \href{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-brain-he}{10X website},
+with the first 50 genes in 8 um bins}
+\item{VisiumHDmulti}{Visium HD mouse brain data from the \href{https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-brain-he}{10X website},
 with the first 50 genes in 8 um and 16 um bins}
 \item{Vizgen}{Same dataset in \code{VizgenOutput} with \code{dataset = "hdf5"}}
 \item{VizgenMulti}{Same as in \code{Vizgen} but with a subset of the data used
