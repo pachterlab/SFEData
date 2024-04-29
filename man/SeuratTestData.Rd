@@ -5,8 +5,7 @@
 \title{Seurat objects to test coercion function}
 \usage{
 SeuratTestData(
-  dataset = c("Visium", "VisiumHD8", "VisiumHDmulti", "Vizgen", "VizgenMulti", "Xenium",
-    "XeniumMulti"),
+  dataset = datasets,
   file_path = ".",
   force = FALSE,
   verbose = TRUE

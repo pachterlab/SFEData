@@ -5,7 +5,7 @@
 \title{Xenium output}
 \usage{
 XeniumOutput(
-  dataset = c("v1", "v2"),
+  dataset = datasets,
   file_path = ".",
   force = FALSE,
   verbose = TRUE
