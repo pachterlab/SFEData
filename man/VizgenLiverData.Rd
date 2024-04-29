@@ -4,10 +4,18 @@
 \alias{VizgenLiverData}
 \title{Vizgen MERFISH mouse liver data}
 \usage{
-VizgenLiverData(dataset = datasets, force = FALSE, verbose = TRUE)
+VizgenLiverData(
+  dataset = datasets,
+  file_path = ".",
+  force = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{dataset}{Which dataset to use, for now can only be "Liver1Slice1".}
+
+\item{file_path}{Path to save downloaded files for the \code{*Output}
+functions which don't return an SFE object.}
 
 \item{force}{Logical, whether to force redownload if the files are already
 present. Defaults to \code{FALSE}.}

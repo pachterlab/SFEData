@@ -1,3 +1,7 @@
+# Version 1.5.3 (04/05/2024)
+* Added small subset of output files from Vizgen, CosMX, and Xenium to unit test
+read functions
+
 # Version 1.2.0 (04/26/2022)
 * Added seqFISH mouse gastrulation data
 * Corrected Xenium dataset format

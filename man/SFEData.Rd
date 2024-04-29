@@ -52,6 +52,9 @@ Onboarding Analysis v1 (\code{\link{XeniumOutput}})
 
 Subset of Xenium output from the human pancreas, generated with Xenium
 Onboarding Analysis v2 (\code{\link{XeniumOutput}})
+
+Seurat object for unit testing function to convert Seurat objects to SFE
+(\code{\link{SeuratTestData}})
 }
 
 \seealso{
@@ -67,6 +70,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Alik Huseynov (\href{https://orcid.org/0000-0002-1438-4389}{ORCID})
   \item Kayla Jackson \email{kaylajac@caltech.edu} (\href{https://orcid.org/0000-0001-6483-0108}{ORCID})
   \item Lior Pachter \email{lpachter@caltech.edu} (\href{https://orcid.org/0000-0002-9164-6231}{ORCID}) [thesis advisor]
 }

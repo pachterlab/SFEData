@@ -3,7 +3,7 @@
 #' This dataset is unpublished, and is a small subset of the original dataset.
 #' When downloaded, the files are in the output format of Vizgen, not an SFE
 #' object. The purpose of this dataset is to demonstrate and test
-#' \code{\link{readVizgen}}.
+#' \code{readVizgen} in SFE.
 #'
 #' @inheritParams McKellarMuscleData
 #' @param dataset Which dataset to use, can be "hdf5" where cell segmentations
@@ -11,4 +11,5 @@
 #' a parquet file.
 #' @return Path to the tarball containing the output directory.
 #' @export
-VizgenOutput <- .make_data_fun(datasets = c("hdf5", "cellpose"), ids = 0)
+VizgenOutput <- .make_data_fun(datasets = c("hdf5", "cellpose"), ids = 9478:9479,
+                               fn = c("vizgen_cellbound", "vizgen_cellbound_Cellpose"))

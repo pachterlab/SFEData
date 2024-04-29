@@ -175,6 +175,42 @@ metadatas$xenium_out <- data.frame(
   RDataPath = file.path("SFEData", c("xenium.tar.gz", "xenium2.tar.gz"))
 )
 
+metadatas$seurat <- data.frame(
+    Title = c("Seurat Visium mouse brain dataset from SeuratData",
+              "Seurat Visium HD mouse brain data subset (8 um)",
+              "Seurat Visium HD mouse brain data subset (8 um and 16 um)",
+              "Seurat Xenium mouse brain data with multiple samples",
+              "Seurat Xenium mouse brain data",
+              "Seurat Vizgen test data with multiple samples",
+              "Seurat Vizgen test data"),
+    Description = c("Subset of stxBrain.SeuratData with the first 50 genes",
+                    "Subset of mouse brain Visium HD data with the first 50 genes, 8 micron bin",
+                    "Subset of mouse brain Visium HD data with the first 50 genes, both 8 micron and 16 micron bin sizes",
+                    "Mouse quarter brain Xenium data from 10X website as Seurat object with multiple samples",
+                    "Mouse quarter brain Xenium data from 10X website as Seurat object",
+                    "Unpublished Vizgen brain tumor data as Seurat with multiple samples",
+                    "Unpublished Vizgen brain tumor data as Seurat object"),
+    BiocVersion = "3.19",
+    Genome = c(rep("GRCm38",5), rep("GRCh38",2)),
+    SourceType = "RDS",
+    SourceUrl = c("https://github.com/satijalab/seurat-data",
+                  rep("https://www.10xgenomics.com/datasets/visium-hd-cytassist-gene-expression-libraries-of-mouse-brain-he",2),
+                  rep("https://cf.10xgenomics.com/samples/xenium/1.0.2/Xenium_V1_FF_Mouse_Brain_Coronal_Subset_CTX_HP/Xenium_V1_FF_Mouse_Brain_Coronal_Subset_CTX_HP_outs.zip",2),
+                  rep("https://www.dkfz.de/en/single-cell-sequencing/open-lab.html",2)),
+    SourceVersion = "",
+    Species = c(rep("Mus musculus",5), rep("Homo sapiens",2)),
+    TaxonomyId = c(rep("10090",5), rep("9606",2)),
+    Coordinate_1_based = NA,
+    DataProvider = c("Satija Lab", rep("10X Genomics",4), rep("scOpenLab DKFZ",2)),
+    Maintainer = "Alik Huseynov <alikhuseyno@gmail.com>",
+    RDataClass = "Seurat",
+    DispatchClass = "Rds",
+    RDataPath = file.path("SFEData", c("seu_anterior1_visium.rds",
+                                       "seu_vishd_8um.rds", "seu_vishd_multi.rds",
+                                       "seu_xen_toy_multi.rds", "seu_xen_toy.rds",
+                                       "seu_vz_toy_multi.rds", "seu_vz_toy.rds"))
+)
+
 metadata <- do.call(rbind, metadatas)
 
 write.csv(metadata, "inst/extdata/metadata.csv", row.names = FALSE)

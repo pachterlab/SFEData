@@ -1,5 +1,6 @@
-.make_data_fun <- function(datasets, ids) {
-    function(dataset = datasets,
+#' @importFrom utils untar
+.make_data_fun <- function(datasets, ids, fn) {
+    function(dataset = datasets, file_path = ".",
              force = FALSE, verbose = TRUE) {
         dataset <- match.arg(dataset)
         ids <- ids
@@ -7,7 +8,14 @@
         id <- paste0("EH", ids[dataset])
         eh <- ExperimentHub()
         ds <- query(eh, "SFEData")
-        ds[[id, force = force, verbose = verbose]]
+        out <- ds[[id, force = force, verbose = verbose]]
+        if (is.character(out)) {
+            untar(out, exdir = file_path)
+            names(fn) <- datasets
+            out <- file.path(file_path, fn[dataset]) |> normalizePath()
+            cat("The downloaded files are in", out, "\n")
+        }
+        return(out)
     }
 }
 
@@ -25,7 +33,7 @@
 #'
 #' @inheritParams McKellarMuscleData
 #' @param dataset Which dataset to use, must be one of "MBM05_rep1" and
-#' "ECM01_rep1".
+#'   "ECM01_rep1".
 #' @return A \code{SpatialFeatureExperiment} object.
 #' @export
 #' @examples
