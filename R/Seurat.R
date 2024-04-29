@@ -20,25 +20,7 @@
 #' }
 #' @return A Seurat object
 #' @export
-SeuratTestData <- function(dataset = c("Visium", "VisiumHD8", "VisiumHDmulti",
-                                       "Vizgen", "VizgenMulti",
-                                       "Xenium", "XeniumMulti"),
-                           file_path = ".", force = FALSE, verbose = TRUE) {
-    dataset <- match.arg(dataset)
-    bfc <- BiocFileCache()
-    url <- switch(dataset,
-                  Visium = "https://caltech.box.com/shared/static/zni0tn9zttbe5rf88u8im6syl49rdp1w",
-                  VisiumHD8 = "https://caltech.box.com/shared/static/xlgsmskh7iqih6d8m83rze4281fr78cq",
-                  VisiumHDmulti = "https://caltech.box.com/shared/static/y4vcocisqh55psbbrkcv2pbrvyttyj7s",
-                  Vizgen = "https://caltech.box.com/shared/static/fg9v2awggcjkjbw2hxmhm3awa91z1n1p",
-                  VizgenMulti = "https://caltech.box.com/shared/static/fn0ip859bbz8xtkjzpl8lz7zecsxe7tr",
-                  Xenium = "https://caltech.box.com/shared/static/aphhxmw4ycz5r9sjv64grvm6xw08msub",
-                  XeniumMulti = "https://caltech.box.com/shared/static/b0tds2olets0vegix0e72gotes9yk35l"
-                  )
-    fn <- bfcrpath(bfc, url)
-    readRDS(fn)
-}
-#SeuratTestData <- .make_data_fun(datasets = c("Visium", "VisiumHD8", "VisiumHDmulti",
-#                                              "Vizgen", "VizgenMulti",
-#                                              "Xenium", "XeniumMulti"),
-#                                 ids = 0) # Placeholder
+SeuratTestData <- .make_data_fun(datasets = c("Visium", "VisiumHD8", "VisiumHDmulti",
+                                              "XeniumMulti", "Xenium",
+                                              "VizgenMulti", "Vizgen"),
+                                 ids = 9529:9535)
