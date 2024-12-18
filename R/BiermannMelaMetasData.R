@@ -6,7 +6,7 @@
         ids <- ids
         names(ids) <- datasets
         id <- paste0("EH", ids[dataset])
-        eh <- ExperimentHub()
+        eh <- tryCatch(ExperimentHub(), error = function(e) ExperimentHub(localHub = TRUE))
         ds <- query(eh, "SFEData")
         out <- ds[[id, force = force, verbose = verbose]]
         if (is.character(out)) {
